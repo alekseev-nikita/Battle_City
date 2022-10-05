@@ -11,7 +11,7 @@ struct Position
 };
 
 class Tank {
-    private:
+    protected:
         Position position;
         sf::Sprite tank_img;
         sf::Texture texture;
@@ -22,7 +22,6 @@ class Tank {
     public:
         Tank(unsigned int x, unsigned int y);
         void drawTank(sf::RenderWindow *win, std::vector<sf::RectangleShape> *walls);
-        void set_position(unsigned int x, unsigned int y);
-        void update(std::vector<sf::RectangleShape> *walls);
+        virtual void update(std::vector<sf::RectangleShape> *walls);
         void shoot();
 };

@@ -1,7 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include "Headers/Map.h"
-#include "Headers/Tank.h"
+#include "Headers/Player.h"
+#include "Headers/Enemy.h"
 #include "Headers/Shell.h"
 
 constexpr unsigned int WINDOW_SIZE = 800;
@@ -12,7 +13,14 @@ int main()
     window->setFramerateLimit(30);
     Map map;
 
-    Tank players_tank(WINDOW_SIZE / 2, WINDOW_SIZE / 1.33);
+    Player players_tank(WINDOW_SIZE / 2, WINDOW_SIZE / 1.33);
+
+    //spawn enemies
+    // Enemy enemy(100, 80);
+    std::vector<Enemy*> enemies;
+    for(sf::Vector2f spawn_point : map.spawn_points) {
+        enemies.push_back(new Enemy(spawn_point.x, spawn_point.y));
+    }
     
 
     while (window->isOpen())
@@ -30,10 +38,18 @@ int main()
 
         map.drawMap(window);
 
+        //draw player
         players_tank.update(&map.walls);
         players_tank.drawTank(window, &map.walls);
 
-        
+        //draw enemy
+        // enemy.update(&map.walls);
+        // enemy.drawTank(window, &map.walls);
+        for(Enemy *enemy : enemies) {
+            enemy->update(&map.walls);
+            enemy->drawTank(window, &map.walls);
+        }
+
 
         window->display();
     }

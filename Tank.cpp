@@ -11,32 +11,10 @@ Tank::Tank(unsigned int x, unsigned int y) {
     tank_img.setPosition(position.x, position.y);
     
 }
-void Tank::set_position(unsigned int x, unsigned int y) {
-    position.x = x;
-    position.y = y;
-}
 void Tank::drawTank(sf::RenderWindow *win, std::vector<sf::RectangleShape> *walls) {
     tank_img.setPosition(position.x, position.y);
     win->draw(tank_img);
 
-    /*
-    auto it = shells.begin();
-    while(it != shells.end()) {
-        it->update();
-        bool is_deleted = false;
-        for(sf::RectangleShape &wall : *walls) {
-            if(it->getShape().getGlobalBounds().intersects(wall.getGlobalBounds())) {
-                it = shells.erase(it);
-                is_deleted = true;
-                break;
-            }
-        }
-        if(!is_deleted) {
-            it->draw(win);
-            ++it;
-        }
-    }
-    */
     auto it = shells.begin();
     while(it != shells.end()) {
         it->draw(win);

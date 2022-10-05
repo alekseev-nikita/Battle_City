@@ -9,6 +9,9 @@ Map::Map() {
                 cell.setPosition(CELL_SIZE * y, CELL_SIZE * x);
                 walls.push_back(cell);
             }
+            else if(MAP[x][y] == '*') {
+                spawn_points.push_back(sf::Vector2f(CELL_SIZE * y, CELL_SIZE * x));
+            }
         }
     }
 }

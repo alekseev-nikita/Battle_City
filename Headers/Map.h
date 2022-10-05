@@ -10,7 +10,7 @@ class Map {
         const std::array<std::string, MAP_SIZE> MAP = {
         "####################",
         "#                  #",
-        "#                  #",
+        "# *    *    *    * #",
         "#  #  #  ##  #  #  #",
         "#  #  #  ##  #  #  #",
         "#  #  #  ##  #  #  #",
@@ -30,7 +30,8 @@ class Map {
         "####################",
     };
     public:
-        std::vector<sf::RectangleShape> walls;
         Map();
+        std::vector<sf::RectangleShape> walls;
+        std::vector<sf::Vector2f> spawn_points;
         void drawMap(sf::RenderWindow *win);
 };
