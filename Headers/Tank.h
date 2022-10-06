@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Shell.h"
+#include "ShellsController.h"
+#include "Map.h"
 
 constexpr unsigned char TANK_SIZE = 38;
 constexpr unsigned char TANK_SPEED = 3;
@@ -15,13 +17,13 @@ class Tank {
         Position position;
         sf::Sprite tank_img;
         sf::Texture texture;
-        std::vector<Shell> shells;
         unsigned char fire_rate = 10;
         unsigned char fire_timer = 0;
         sf::Clock clock;
     public:
+        bool alive = true;
         Tank(unsigned int x, unsigned int y);
-        void drawTank(sf::RenderWindow *win, std::vector<sf::RectangleShape> *walls);
-        virtual void update(std::vector<sf::RectangleShape> *walls);
+        void drawTank(sf::RenderWindow *win);
+        virtual void update();
         void shoot();
 };

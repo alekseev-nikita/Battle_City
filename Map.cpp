@@ -1,5 +1,7 @@
 #include "Headers/Map.h"
 
+std::vector<sf::RectangleShape> Map::walls = {};
+
 Map::Map() {
     cell = sf::RectangleShape(sf::Vector2f(CELL_SIZE - 1, CELL_SIZE - 1));
     cell.setFillColor(sf::Color(255, 0, 0));

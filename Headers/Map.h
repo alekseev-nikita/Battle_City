@@ -31,7 +31,7 @@ class Map {
     };
     public:
         Map();
-        std::vector<sf::RectangleShape> walls;
+        static std::vector<sf::RectangleShape> walls;
         std::vector<sf::Vector2f> spawn_points;
         void drawMap(sf::RenderWindow *win);
 };
