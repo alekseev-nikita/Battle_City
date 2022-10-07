@@ -6,15 +6,22 @@ void ShellsController::updateAllShells() {
     auto it = ShellsController::ingame_shells.begin();
     while(it != ShellsController::ingame_shells.end()) {
         it->update();
-        bool is_deleted = false;
+
+        if(!it->alive) {
+            it = ShellsController::ingame_shells.erase(it);
+            continue;
+        }
+
+        bool to_delete = false;
         for(sf::RectangleShape &wall : Map::walls) {
             if(it->getShape().getGlobalBounds().intersects(wall.getGlobalBounds())) {
+                it->alive = false;
+                to_delete = true;
                 it = ShellsController::ingame_shells.erase(it);
-                is_deleted = true;
                 break;
             }
         }
-        if(!is_deleted) {
+        if(!to_delete) {
             ++it;
         }
     }

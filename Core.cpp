@@ -17,7 +17,7 @@ int main()
     Player players_tank(WINDOW_SIZE / 2, WINDOW_SIZE / 1.33);
 
     //spawn enemies
-    std::vector<Enemy*> enemies;
+    std::vector<Enemy *> enemies;
     for(sf::Vector2f spawn_point : map.spawn_points) {
         enemies.push_back(new Enemy(spawn_point.x, spawn_point.y));
     }
@@ -43,10 +43,17 @@ int main()
         players_tank.drawTank(window);
 
         //draw enemy
-        for(Enemy *enemy : enemies) {
-            enemy->update();
-            if(enemy->alive) {
-                enemy->drawTank(window);
+        auto it = enemies.begin();
+        while(it != enemies.end()) {
+            if(!(*it)->alive) {
+                Enemy *p = (*it);
+                it = enemies.erase(it);
+                delete p;
+            }
+            else {
+                (*it)->update();
+                (*it)->drawTank(window);
+                ++it;
             }
         }
 
