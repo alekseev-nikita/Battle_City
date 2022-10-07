@@ -18,9 +18,12 @@ void Enemy::update(Player &player, sf::RenderWindow *window) {
     if(attack_direction != -1) {
         //turn that direction
         tank_img.setRotation(90.f * attack_direction);
+        shoot();
     }
-
-    //write shoots & movement
+    else {
+        //move
+        
+    }
 }
 
 char Enemy::getDirectionToVisiblePlayer(Player &player, sf::RenderWindow *window) {
@@ -32,9 +35,22 @@ char Enemy::getDirectionToVisiblePlayer(Player &player, sf::RenderWindow *window
         line.setRotation(90.f * direction);
         
         unsigned char ray_length = 1;
-        const unsigned char RAY_MAX_LENGTH = 10;
+        const unsigned char RAY_MAX_LENGTH = 30;
         while(ray_length != RAY_MAX_LENGTH) {
-            line.setScale(1.f, ray_length);
+            line.setSize(sf::Vector2f(2.f, (-CELL_SIZE/2) * ray_length));
+            
+            //checkwalls
+            bool wall_collision = false;
+            for(sf::RectangleShape &wall : Map::walls) {
+                if(line.getGlobalBounds().intersects(wall.getGlobalBounds())) {
+                    wall_collision = true;
+                    break;
+                }
+            }
+            if(wall_collision) {
+                break;
+            }
+
             if(line.getGlobalBounds().intersects(player.getPlayer().getGlobalBounds())) {
                 line.setFillColor(sf::Color(255, 0, 0));
                 window->draw(line);

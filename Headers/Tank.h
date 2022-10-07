@@ -17,7 +17,7 @@ class Tank {
         Position position;
         sf::Sprite tank_img;
         sf::Texture texture;
-        unsigned char fire_rate = 10;
+        unsigned char fire_rate = 30;
         unsigned char fire_timer = 0;
         sf::Clock clock;
     public:
