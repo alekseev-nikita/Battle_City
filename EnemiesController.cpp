@@ -1,6 +1,6 @@
 #include "Headers/EnemiesController.h"
 
-void EnemiesController::controll(std::vector<Enemy *> &enemies, sf::RenderWindow *window) {
+void EnemiesController::controll(std::vector<Enemy *> &enemies, Player &player, sf::RenderWindow *window) {
     auto it = enemies.begin();
         while(it != enemies.end()) {
             if(!(*it)->alive) {
@@ -9,7 +9,7 @@ void EnemiesController::controll(std::vector<Enemy *> &enemies, sf::RenderWindow
                 delete p;
             }
             else {
-                (*it)->update();
+                (*it)->update(player, window);
                 (*it)->drawTank(window);
                 ++it;
             }

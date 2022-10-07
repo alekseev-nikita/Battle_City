@@ -15,7 +15,7 @@ int main()
     window->setFramerateLimit(30);
     Map map;
 
-    Player players_tank(WINDOW_SIZE / 2, WINDOW_SIZE / 1.33);
+    Player player(WINDOW_SIZE / 2, WINDOW_SIZE / 1.33);
 
     //spawn enemies
     std::vector<Enemy *> enemies;
@@ -40,11 +40,11 @@ int main()
         map.drawMap(window);
 
         //draw player
-        players_tank.update();
-        players_tank.drawTank(window);
+        player.update();
+        player.drawTank(window);
 
         //draw enemy
-        EnemiesController::controll(enemies, window);
+        EnemiesController::controll(enemies, player, window);
 
         //draw shells
         ShellsController::updateAllShells();

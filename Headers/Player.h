@@ -4,4 +4,5 @@
 class Player : public Tank {
     public:
         Player(unsigned int x, unsigned int y);
+        sf::Sprite& getPlayer();
 };

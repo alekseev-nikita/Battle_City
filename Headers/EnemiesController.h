@@ -3,5 +3,5 @@
 
 class EnemiesController {
     public:
-        static void controll(std::vector<Enemy *> &enemies, sf::RenderWindow *window);
+        static void controll(std::vector<Enemy *> &enemies, Player &player, sf::RenderWindow *window);
 };
