@@ -5,6 +5,7 @@
 #include "Headers/Enemy.h"
 #include "Headers/Shell.h"
 #include "Headers/ShellsController.h"
+#include "Headers/EnemiesController.h"
 
 constexpr unsigned int WINDOW_SIZE = 800;
 
@@ -43,19 +44,7 @@ int main()
         players_tank.drawTank(window);
 
         //draw enemy
-        auto it = enemies.begin();
-        while(it != enemies.end()) {
-            if(!(*it)->alive) {
-                Enemy *p = (*it);
-                it = enemies.erase(it);
-                delete p;
-            }
-            else {
-                (*it)->update();
-                (*it)->drawTank(window);
-                ++it;
-            }
-        }
+        EnemiesController::controll(enemies, window);
 
         //draw shells
         ShellsController::updateAllShells();
