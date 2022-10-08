@@ -17,9 +17,8 @@ class Tank {
         Position position;
         sf::Sprite tank_img;
         sf::Texture texture;
-        unsigned char fire_rate = 30;
-        unsigned char fire_timer = 0;
         sf::Clock clock;
+        unsigned int shoot_delay = 1000;
     public:
         bool alive = true;
         Tank(unsigned int x, unsigned int y);

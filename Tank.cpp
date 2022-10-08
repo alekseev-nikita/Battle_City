@@ -18,6 +18,14 @@ void Tank::drawTank(sf::RenderWindow *win)
 }
 void Tank::update()
 {
+    for(Shell &shell : ShellsController::ingame_shells) {
+        if(tank_img.getGlobalBounds().intersects(shell.getShape().getGlobalBounds())) {
+            alive = false;
+            shell.alive = false;
+            return;
+        }
+    }
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) == 1)
     {
         shoot();
@@ -58,7 +66,7 @@ void Tank::update()
 }
 void Tank::shoot()
 {
-    if (clock.getElapsedTime().asMilliseconds() >= 500)
+    if (clock.getElapsedTime().asMilliseconds() >= shoot_delay)
     {
         auto rot = tank_img.getRotation();
         if (rot == 0)

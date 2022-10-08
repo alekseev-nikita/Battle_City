@@ -6,6 +6,7 @@
 #include "Headers/Shell.h"
 #include "Headers/ShellsController.h"
 #include "Headers/EnemiesController.h"
+#include "Headers/GameOver.h"
 
 constexpr unsigned int WINDOW_SIZE = 800;
 
@@ -23,6 +24,8 @@ int main()
         enemies.push_back(new Enemy(spawn_point.x, spawn_point.y));
     }
     
+    //GameOver
+    GameOver game_over(WINDOW_SIZE / 2, WINDOW_SIZE / 2);
 
     while (window->isOpen())
     {
@@ -36,8 +39,13 @@ int main()
         }
 
         window->clear();
-
         map.drawMap(window);
+
+        if(!player.alive) {
+            window->draw(game_over.getSprite());
+            window->display();
+            continue;
+        }
 
         //draw player
         player.update();

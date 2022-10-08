@@ -1,6 +1,6 @@
 project(Battle_City)
 
-set (SOURCE Core.cpp Map.cpp Tank.cpp Shell.cpp Player.cpp Enemy.cpp ShellsController.cpp EnemiesController.cpp)
+set (SOURCE Core.cpp Map.cpp Tank.cpp Shell.cpp Player.cpp Enemy.cpp ShellsController.cpp EnemiesController.cpp GameOver.cpp)
 
 add_executable(game ${SOURCE})
 

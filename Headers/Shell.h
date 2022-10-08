@@ -14,7 +14,5 @@ class Shell {
         Shell(sf::Vector2f pos, sf::Vector2f dir);
         void draw(sf::RenderWindow *win);
         void update();
-        void hitWall();
-        void hitEnemy();
         sf::CircleShape getShape();
 };

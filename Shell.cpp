@@ -18,6 +18,3 @@ void Shell::update() {
     position += sf::Vector2f(direction.x * speed, direction.y * speed);
     shell_img.setPosition(position);
 }
-void Shell::hitWall() {
-    delete this;
-}
