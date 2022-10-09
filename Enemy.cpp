@@ -35,11 +35,9 @@ void Enemy::move(sf::RenderWindow *window, Player &player) {
 
     for(sf::RectangleShape &wall : Map::walls) {
         if(fwd_wand.getGlobalBounds().intersects(wall.getGlobalBounds())) {
-            std::cout << "Wall Collision !" << std::endl;
             unsigned char old_direction = move_direction;
             while(old_direction == move_direction) {
                 move_direction = distr(gen);
-                std::cout << "Direction = " << move_direction << std::endl;
             }
             tank_img.setRotation(90.f * move_direction);
             return;

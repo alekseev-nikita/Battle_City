@@ -2,7 +2,6 @@
 #include "Tank.h"
 #include "Player.h"
 #include <random>
-#include <iostream>
 
 class Enemy : public Tank {
     private:
