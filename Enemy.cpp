@@ -7,6 +7,7 @@ Enemy::Enemy(unsigned int x, unsigned int y) : Tank(x, y) {
     gen = std::mt19937(rd());
     distr = std::uniform_int_distribution<>(0, 3);
     move_direction = distr(gen);
+    sound.setVolume(10.f);
 }
 void Enemy::update(Player &player, sf::RenderWindow *window) {
     for(Shell &shell : ShellsController::ingame_shells) {
@@ -27,8 +28,8 @@ void Enemy::update(Player &player, sf::RenderWindow *window) {
     }
 }
 void Enemy::move(sf::RenderWindow *window, Player &player) {
-    sf::RectangleShape fwd_wand(sf::Vector2f(2.f, -CELL_SIZE));
-    fwd_wand.setOrigin(sf::Vector2f(1.f, 0.f));
+    sf::RectangleShape fwd_wand(sf::Vector2f(15.f, -CELL_SIZE));
+    fwd_wand.setOrigin(sf::Vector2f(7.5f, -5.f));
     fwd_wand.setFillColor(sf::Color(0, 255, 0));
     fwd_wand.setPosition(tank_img.getPosition().x, tank_img.getPosition().y);
     fwd_wand.setRotation(tank_img.getRotation());
@@ -66,16 +67,31 @@ void Enemy::move(sf::RenderWindow *window, Player &player) {
 
 char Enemy::getDirectionToVisiblePlayer(Player &player, sf::RenderWindow *window) {
     for(char direction = 0; direction < 4; ++direction) {
-        sf::RectangleShape line(sf::Vector2f(10.f, -CELL_SIZE));
-        line.setOrigin(sf::Vector2f(5.f, 0.f));
-        line.setPosition(tank_img.getPosition().x, tank_img.getPosition().y);
+        sf::RectangleShape line(sf::Vector2f(20.f, -CELL_SIZE));
+        line.setOrigin(sf::Vector2f(10.f, 0.f));
+        float offset = 10.f;
+        switch (move_direction) {
+            case 0:
+                line.setPosition(tank_img.getPosition().x, tank_img.getPosition().y + offset);
+                break;
+            case 1:
+                line.setPosition(tank_img.getPosition().x - offset, tank_img.getPosition().y);
+                break;
+            case 2:
+                line.setPosition(tank_img.getPosition().x, tank_img.getPosition().y - offset);
+                break;
+            case 3:
+                line.setPosition(tank_img.getPosition().x + offset, tank_img.getPosition().y);
+                break;
+        }    
+
         line.setFillColor(sf::Color(255, 255, 0));
         line.setRotation(90.f * direction);
-        
+
         unsigned char ray_length = 1;
         const unsigned char RAY_MAX_LENGTH = 30;
         while(ray_length != RAY_MAX_LENGTH) {
-            line.setSize(sf::Vector2f(2.f, (-CELL_SIZE/2) * ray_length));
+            line.setSize(sf::Vector2f(20.f, (-CELL_SIZE/2) * ray_length));
             
             //checkwalls
             bool wall_collision = false;

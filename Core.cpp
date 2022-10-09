@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <string>
 #include "Headers/Map.h"
 #include "Headers/Player.h"
@@ -14,17 +15,21 @@ int main()
 {
     sf::RenderWindow *window = new sf::RenderWindow(sf::VideoMode(WINDOW_SIZE, WINDOW_SIZE), "Battle City");
     window->setFramerateLimit(30);
+
+    sf::SoundBuffer main_theme;
+    sf::Sound sound;
+    main_theme.loadFromFile("../resources/theme.wav");
+    sound.setBuffer(main_theme);
+    sound.setVolume(70.f);
+    sound.setLoop(true);
+    sound.play();
+
     Map map;
 
     Player player(WINDOW_SIZE / 2, WINDOW_SIZE / 1.33);
 
-    //spawn enemies
     std::vector<Enemy *> enemies;
-    for(sf::Vector2f spawn_point : map.spawn_points) {
-        enemies.push_back(new Enemy(spawn_point.x, spawn_point.y));
-    }
-    
-    //GameOver
+
     GameOver game_over(WINDOW_SIZE / 2, WINDOW_SIZE / 2);
 
     while (window->isOpen())
@@ -35,6 +40,12 @@ int main()
             if (event.type == sf::Event::Closed)
             {
                 window->close();
+            }
+        }
+
+        if(enemies.size() == 0) {
+            for(sf::Vector2f spawn_point : map.spawn_points) {
+                enemies.push_back(new Enemy(spawn_point.x, spawn_point.y));
             }
         }
 

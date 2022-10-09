@@ -2,9 +2,10 @@
 
 Tank::Tank(unsigned int x, unsigned int y)
 {
+    shot_sound.loadFromFile("../resources/shot.wav");
     position.x = x;
     position.y = y;
-    texture.loadFromFile("../tank.png");
+    texture.loadFromFile("../resources/tank.png");
     tank_img.setTexture(texture);
     sf::Rect sprite_size = tank_img.getGlobalBounds();
     tank_img.setOrigin(sf::Vector2f(sprite_size.width / 2, sprite_size.height / 2));
@@ -69,6 +70,8 @@ void Tank::shoot()
     if (clock.getElapsedTime().asMilliseconds() >= shoot_delay)
     {
         auto rot = tank_img.getRotation();
+        sound.setBuffer(shot_sound);
+        sound.play();
         if (rot == 0)
         {
             ShellsController::ingame_shells.push_back(Shell(tank_img.getPosition(), sf::Vector2f(0.f, -1.f)));

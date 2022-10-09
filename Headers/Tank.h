@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Shell.h"
 #include "ShellsController.h"
 #include "Map.h"
@@ -14,6 +15,8 @@ struct Position
 
 class Tank {
     protected:
+        sf::Sound sound;
+        sf::SoundBuffer shot_sound;
         Position position;
         sf::Sprite tank_img;
         sf::Texture texture;

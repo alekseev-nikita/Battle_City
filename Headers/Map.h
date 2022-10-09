@@ -6,11 +6,12 @@ constexpr unsigned int MAP_SIZE = 40;
 constexpr unsigned char CELL_SIZE = 40;
 class Map {
     private:
+        sf::Texture texture;
         sf::RectangleShape cell;
         const std::array<std::string, MAP_SIZE> MAP = {
         "####################",
         "#                  #",
-        "# *    *    *    * #",
+        "# *     *   *     *#",
         "#  #  #  ##  #  #  #",
         "#  #  #  ##  #  #  #",
         "#  #  #  ##  #  #  #",
