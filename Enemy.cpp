@@ -66,8 +66,8 @@ void Enemy::move(sf::RenderWindow *window, Player &player) {
 
 char Enemy::getDirectionToVisiblePlayer(Player &player, sf::RenderWindow *window) {
     for(char direction = 0; direction < 4; ++direction) {
-        sf::RectangleShape line(sf::Vector2f(2.f, -CELL_SIZE));
-        line.setOrigin(sf::Vector2f(1.f, 0.f));
+        sf::RectangleShape line(sf::Vector2f(10.f, -CELL_SIZE));
+        line.setOrigin(sf::Vector2f(5.f, 0.f));
         line.setPosition(tank_img.getPosition().x, tank_img.getPosition().y);
         line.setFillColor(sf::Color(255, 255, 0));
         line.setRotation(90.f * direction);
