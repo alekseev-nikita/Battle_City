@@ -23,6 +23,7 @@ void Tank::update()
         if(tank_img.getGlobalBounds().intersects(shell.getShape().getGlobalBounds())) {
             alive = false;
             shell.alive = false;
+            sound.stop();
             return;
         }
     }
